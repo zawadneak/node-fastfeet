@@ -11,4 +11,8 @@ routes.use(tokenAuth);
 
 routes.post('/recipient',RecipientController.store)
 
+routes.put('/recipient/:id', RecipientController.update);
+
+routes.delete('/recipient/:id', RecipientController.delete);
+
 export default routes;

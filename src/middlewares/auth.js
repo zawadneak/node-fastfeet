@@ -15,12 +15,14 @@ export default async (req,res,next)=>{
   try{
     const decoded = await promisify(jwt.verify)(token,authConfig.secret);
 
-    console.log(decoded)
+    if(decoded){
+      console.log("User Authenticated!")
+    }
 
     return next();
   }
   catch(error){
-    return res.status(401).json({error: "Invalid Token!"})
+    return res.status(401).json({error: "Unauthorized!"})
   }
 
 }

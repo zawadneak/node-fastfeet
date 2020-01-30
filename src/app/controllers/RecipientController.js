@@ -32,6 +32,69 @@ class RecipientController {
     return res.status(400).json({error: 'Recipient already exists!'})
   }
 
+  async update(req,res){
+    var name = null;
+
+    if(req.body.name){
+      name = req.body.name;
+    }
+
+    const { id } = req.params;
+
+    const idCheck = await Recipient.findByPk(id);
+
+    if(!id || !idCheck){
+      return res.status(400).json({error: 'Invalid recipient id!'})
+    }
+
+
+    const schema = Yup.object().shape({
+      name: Yup.string(),
+      street: Yup.string(),
+      number: Yup.number().positive(),
+      complement: Yup.string(),
+      state: Yup.string(),
+      city: Yup.string(),
+      postalCode: Yup.number().positive(),
+    })
+
+    if(!(await schema.isValid(req.body))){
+      return res.status(400).json({ error: 'Invalid or missing information!'});
+    }
+
+    if(name){
+      const findRecipient = await Recipient.findOne({where:{ name }});
+      if(findRecipient){
+        return res.status(400).json({error: 'Recipient already exists!'})
+      }
+    }
+
+    const update = await Recipient.update(req.body,{where:{id}})
+    .then(()=>{
+      console.log('Updated!')
+    })
+    return res.send();
+  }
+
+  async delete(req,res){
+    const { id } = req.params;
+
+    const idCheck = await Recipient.findByPk(id);
+
+    const schema = Yup.object().shape({
+      id: Yup.number().positive().required()
+    });
+
+    if (!(await schema.isValid(req.params)) || !idCheck){
+      return res.status(400).json({error: 'Invalid recipient id!'})
+    }
+
+    await Recipient.destroy({where:{id}});
+
+    return res.send();
+
+  }
+
 }
 
 export default new RecipientController();
