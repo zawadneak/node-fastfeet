@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('users',{
-      id:{
+      id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
