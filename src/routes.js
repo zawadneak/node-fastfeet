@@ -5,11 +5,11 @@ import tokenAuth from './middlewares/auth';
 
 const routes = new Router();
 
-routes.post('/login',SessionController.store);
+routes.post('/login', SessionController.store);
 
 routes.use(tokenAuth);
 
-routes.post('/recipient',RecipientController.store)
+routes.post('/recipient', RecipientController.store);
 
 routes.put('/recipient/:id', RecipientController.update);
 
