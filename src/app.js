@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import routes from './routes';
 import log from './middlewares/log';
 
@@ -16,6 +17,11 @@ class App {
     this.server.use(express.json());
 
     this.server.use(log);
+
+    this.server.use(
+      '/files',
+      express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+    );
   }
 
   routes() {
