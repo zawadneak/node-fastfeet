@@ -63,6 +63,35 @@ class ProviderController {
 
     return res.send();
   }
+
+  async index(req, res) {
+    const providers = await Provider.findAll({
+      attributes: ['id', 'name', 'email'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
+
+    return res.json(providers);
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const isProviderValid = await Provider.findByPk(id);
+
+    if (!isProviderValid) {
+      return res.status(400).json({ error: 'Invalid provider!' });
+    }
+
+    await Provider.destroy({ where: { id } });
+
+    return res.send();
+  }
 }
 
 export default new ProviderController();
