@@ -7,7 +7,7 @@ module.exports = {
     'airbnb-base',
     'prettier'
   ],
-  plugins: ['plugins'],
+  plugins: ['prettier'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
