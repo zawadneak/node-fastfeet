@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
-import { startOfDay } from 'date-fns';
+import { startOfDay, isBefore, isAfter, setHours, setMinutes } from 'date-fns';
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Provider from '../models/Provider';
@@ -122,7 +122,24 @@ class DeliveryController {
         .json({ error: 'You have already picked up 5 packages' });
     }
 
-    const value = { start_date: new Date().getTime() };
+    const date = new Date();
+
+    let morningDate = setMinutes(date, 0);
+    morningDate = setHours(morningDate, 8);
+
+    let lateDate = setMinutes(date, 0);
+    lateDate = setHours(morningDate, 18);
+
+    const morningLimit = isBefore(morningDate, date);
+    const lateLimit = isAfter(lateDate, date);
+
+    if (!morningLimit || !lateLimit) {
+      return res.status(401).json({
+        error: 'Deliveries must be picked up between 8:00 and 18:00!',
+      });
+    }
+
+    const value = { start_date: date };
 
     await Delivery.update(value, {
       where: {
