@@ -33,6 +33,13 @@ In this project a few things were added that weren't in the instructions:
 - Created recipient manipulation routes *(POST,PUT and DELETE methods)*
 - Created recipient controller instaces for those routes *(STORE, UPDATE and DELETE methods)*
 
+#### My route disposition!
+To sum up this is the route disposition inside my *Insomnia*:
+<p align="center">
+  <img src="http://i.imgur.com/bwaek0c.png"/>
+ </p>
+ 
+
 :wrench: Technologies used:
 ----------------------
 In this project the following technologies and libraries were used:
