@@ -5,10 +5,11 @@ import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Provider from '../models/Provider';
 
+import DeliveryMail from '../jobs/DeliveryMail';
+import Queue from '../../lib/Queue';
+
 class DeliveryController {
   async store(req, res) {
-    // MISSING - EMAIL PROVIDER WHEN DELIVERY IS SET UP
-
     const schema = Yup.object().shape({
       product: Yup.string().required(),
       recipient_id: Yup.number().required(),
@@ -35,6 +36,18 @@ class DeliveryController {
     const newDelivery = await Delivery.create(req.body);
 
     const { id, product, provider_id: pid, recipient_id: rid } = newDelivery;
+
+    const { street, number, complement, city } = isRecipientValid;
+
+    await Queue.add(DeliveryMail.key, {
+      street,
+      number,
+      complement,
+      city,
+      isProviderValid,
+      isRecipientValid,
+      id,
+    });
 
     return res.json({
       id,

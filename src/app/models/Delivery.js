@@ -23,6 +23,10 @@ class Delivery extends Model {
       foreignKey: 'recipient_id',
       as: 'destination',
     });
+    this.belongsTo(models.Provider, {
+      foreignKey: 'provider_id',
+      as: 'provider',
+    });
   }
 }
 

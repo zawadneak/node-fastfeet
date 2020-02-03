@@ -1,11 +1,6 @@
 import { Op } from 'sequelize';
-import multer from 'multer';
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
-import File from '../models/File';
-import multerConfig from '../../config/multer';
-
-const upload = multer(multerConfig);
 
 class DeliveredController {
   async index(req, res) {

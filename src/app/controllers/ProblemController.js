@@ -1,6 +1,11 @@
 import DeliveryProblem from '../models/DeliveryProblem';
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
+import Provider from '../models/Provider';
+import Mail from '../../lib/Mail';
+
+import CancellationMail from '../jobs/CancellationMail';
+import Queue from '../../lib/Queue';
 
 class ProblemController {
   async index(req, res) {
@@ -90,15 +95,39 @@ class ProblemController {
       where: {
         id: problem_id,
       },
+      include: [
+        {
+          model: Delivery,
+          as: 'delivery',
+          include: [
+            {
+              model: Provider,
+              as: 'provider',
+            },
+            {
+              model: Recipient,
+              as: 'destination',
+            },
+          ],
+        },
+      ],
     });
 
     if (!problem) {
       return res.status(400).json({ error: 'Invalid problem id!' });
     }
 
+    const { name, email } = problem.delivery.provider;
+
+    await Queue.add(CancellationMail.key, {
+      name,
+      email,
+      problem,
+    });
+
     const { delivery_id } = problem;
 
-    await Delivery.update(
+    await await Delivery.update(
       {
         canceled_at: new Date(),
       },
