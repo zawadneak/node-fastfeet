@@ -49,6 +49,8 @@ In this project the following technologies and libraries were used:
 - [**bcryptJS**](https://www.npmjs.com/package/bcryptjs)
 - [**multer**](https://github.com/expressjs/multer)
 - [**date-fns**](https://date-fns.org/docs/Getting-Started)
+- [**Nodemailer**](https://nodemailer.com/about/)
+- [**bee-queue**](https://github.com/bee-queue/bee-queue)
 
 ## :information_source: How to use this project
 To clone and run this application, you'll need Git, NodeJS and Yarn. Input theese lines in your command line:
