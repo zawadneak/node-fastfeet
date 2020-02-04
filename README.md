@@ -10,9 +10,13 @@
 </p>
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/rocketseat/bootcamp-gostack-desafio-01?color=%2304D361">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/lucascassilha/node-fastfeet?color=green&style=plastic">
+  
+   <img alt="GitHub language percentage" src="https://img.shields.io/github/languages/top/lucascassilha/node-fastfeet?color=green&style=plastic">
 
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361">
+  <img alt="Codacy Grade" src="https://img.shields.io/codacy/grade/fef83ff9102641909691c2c9c541c7e4?style=plastic">
+
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361?style=plastic">
 
 </p>
 
