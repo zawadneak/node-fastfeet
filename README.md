@@ -19,6 +19,9 @@
 
 :rocket: The Challenge
 ------------------
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a2ca4692bfe14a589e5c3daf3844ddd4)](https://app.codacy.com/manual/lucascassilha/node-fastfeet?utm_source=github.com&utm_medium=referral&utm_content=lucascassilha/node-fastfeet&utm_campaign=Badge_Grade_Settings)
+
 This challenge was proposed at a [**Rocketseat**](https://rocketseat.com.br/) GoSack bootcamp! The main objective is creating a 
 backend application for a imaginary delivery company. Along with this server, the web front-end and the mobile application will 
 also be developed!
