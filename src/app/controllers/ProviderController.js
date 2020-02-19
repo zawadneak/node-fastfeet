@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 import Provider from '../models/Provider';
 import File from '../models/File';
 
@@ -65,7 +66,13 @@ class ProviderController {
   }
 
   async index(req, res) {
-    const providers = await Provider.findAll({
+    const { q, page } = req.query;
+    const providers = await Provider.findAndCountAll({
+      where: {
+        name: {
+          [Op.like]: `${q || ''}%`,
+        },
+      },
       attributes: ['id', 'name', 'email'],
       include: [
         {
@@ -74,9 +81,11 @@ class ProviderController {
           attributes: ['id', 'path', 'url'],
         },
       ],
+      limit: 10,
+      offset: page >= 1 ? (page - 1) * 10 : 0,
     });
 
-    return res.json(providers);
+    return res.json(providers.rows);
   }
 
   async delete(req, res) {
