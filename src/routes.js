@@ -40,6 +40,8 @@ routes.post('/recipient', RecipientController.store);
 
 routes.put('/recipient/:id', RecipientController.update);
 
+routes.get('/recipient', RecipientController.index);
+
 routes.delete('/recipient/:id', RecipientController.delete);
 
 routes.post('/provider', ProviderController.store);

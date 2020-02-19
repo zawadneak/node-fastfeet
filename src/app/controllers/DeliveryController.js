@@ -59,12 +59,16 @@ class DeliveryController {
 
   async index(req, res) {
     const { provider_id } = req.params;
+    const { q, page } = req.query;
 
-    const deliveries = await Delivery.findAll({
+    const deliveries = await Delivery.findAndCountAll({
       where: {
         provider_id,
         canceled_at: null,
         end_date: null,
+        product: {
+          [Op.like]: `${q || ''}%`,
+        },
       },
       attributes: ['id', 'product', 'start_date'],
       include: [
@@ -82,9 +86,11 @@ class DeliveryController {
           ],
         },
       ],
+      limit: 10,
+      offset: page >= 1 ? (page - 1) * 10 : 0,
     });
 
-    return res.json(deliveries);
+    return res.json(deliveries.rows);
   }
 
   // When provider picks up the package
