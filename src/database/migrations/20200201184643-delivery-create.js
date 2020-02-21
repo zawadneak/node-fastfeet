@@ -15,7 +15,7 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: false,
+        allowNull: true,
       },
       provider_id: {
         type: Sequelize.INTEGER,
