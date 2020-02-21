@@ -9,6 +9,7 @@ import FileController from './app/controllers/FileController';
 import DeliveredController from './app/controllers/DeliveredController';
 import ProblemController from './app/controllers/ProblemController';
 import DeliveryController from './app/controllers/DeliveryController';
+import DeliveryEditController from './app/controllers/DeliveryEditController';
 import tokenAuth from './middlewares/auth';
 
 const routes = new Router();
@@ -57,6 +58,8 @@ routes.post('/delivery', DeliveryController.store);
 routes.get('/delivery', DeliveryController.index);
 
 routes.get('/delivery/problems', ProblemController.index);
+
+routes.put('/delivery/:delivery_id', DeliveryEditController.update);
 
 routes.get('/delivery/:delivery_id/problems', ProblemController.show);
 
