@@ -4,6 +4,7 @@ import { startOfDay, isBefore, isAfter, setHours, setMinutes } from 'date-fns';
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Provider from '../models/Provider';
+import File from '../models/File';
 
 import DeliveryMail from '../jobs/DeliveryMail';
 import Queue from '../../lib/Queue';
@@ -98,12 +99,11 @@ class DeliveryController {
 
     const deliveries = await Delivery.findAndCountAll({
       where: {
-        canceled_at: null,
-        end_date: null,
         product: {
           [Op.like]: `${q || ''}%`,
         },
       },
+      order: [['id', 'DESC']],
       include: [
         {
           model: Recipient,
@@ -116,6 +116,18 @@ class DeliveryController {
             'complement',
             'state',
             'city',
+          ],
+        },
+        {
+          model: Provider,
+          as: 'provider',
+          attributes: ['id', 'name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['id', 'path', 'url'],
+            },
           ],
         },
       ],
