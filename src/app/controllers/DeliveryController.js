@@ -99,12 +99,11 @@ class DeliveryController {
 
     const deliveries = await Delivery.findAndCountAll({
       where: {
-        canceled_at: null,
-        end_date: null,
         product: {
           [Op.like]: `${q || ''}%`,
         },
       },
+      order: [['id', 'DESC']],
       include: [
         {
           model: Recipient,
