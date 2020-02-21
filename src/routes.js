@@ -20,7 +20,7 @@ routes.post('/files', upload.single('file'), FileController.store);
 
 routes.get('/provider/:provider_id/delivered', DeliveredController.index);
 
-routes.get('/provider/:provider_id/deliveries', DeliveryController.index);
+routes.get('/provider/:provider_id/deliveries', DeliveryController.show);
 
 routes.put(
   '/provider/:provider_id/deliveries/:delivery_id',
@@ -53,6 +53,8 @@ routes.get('/provider', ProviderController.index);
 routes.delete('/provider/:id', ProviderController.delete);
 
 routes.post('/delivery', DeliveryController.store);
+
+routes.get('/delivery', DeliveryController.index);
 
 routes.get('/delivery/problems', ProblemController.index);
 

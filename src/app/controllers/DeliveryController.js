@@ -57,7 +57,7 @@ class DeliveryController {
     });
   }
 
-  async index(req, res) {
+  async show(req, res) {
     const { provider_id } = req.params;
     const { q, page } = req.query;
 
@@ -71,6 +71,39 @@ class DeliveryController {
         },
       },
       attributes: ['id', 'product', 'start_date'],
+      include: [
+        {
+          model: Recipient,
+          as: 'destination',
+          attributes: [
+            'id',
+            'name',
+            'street',
+            'number',
+            'complement',
+            'state',
+            'city',
+          ],
+        },
+      ],
+      limit: 10,
+      offset: page >= 1 ? (page - 1) * 10 : 0,
+    });
+
+    return res.json(deliveries.rows);
+  }
+
+  async index(req, res) {
+    const { q, page } = req.query;
+
+    const deliveries = await Delivery.findAndCountAll({
+      where: {
+        canceled_at: null,
+        end_date: null,
+        product: {
+          [Op.like]: `${q || ''}%`,
+        },
+      },
       include: [
         {
           model: Recipient,
