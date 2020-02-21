@@ -57,6 +57,8 @@ routes.post('/delivery', DeliveryController.store);
 
 routes.get('/delivery', DeliveryController.index);
 
+routes.delete('/delivery/:id', DeliveryController.delete);
+
 routes.get('/delivery/problems', ProblemController.index);
 
 routes.put('/delivery/:delivery_id', DeliveryEditController.update);

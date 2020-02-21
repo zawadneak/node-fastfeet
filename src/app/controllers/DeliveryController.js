@@ -199,6 +199,20 @@ class DeliveryController {
     });
     return res.json();
   }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const isDeliveryValid = await Delivery.findByPk(id);
+
+    if (!isDeliveryValid) {
+      return res.status(400).json({ error: 'Invalid delivery!' });
+    }
+
+    await Delivery.destroy({ where: { id } });
+
+    return res.send();
+  }
 }
 
 export default new DeliveryController();
