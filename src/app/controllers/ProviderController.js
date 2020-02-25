@@ -81,6 +81,7 @@ class ProviderController {
           attributes: ['id', 'path', 'url'],
         },
       ],
+      order: [['id', 'DESC']],
       limit: 10,
       offset: page >= 1 ? (page - 1) * 10 : 0,
     });

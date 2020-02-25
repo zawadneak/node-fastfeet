@@ -2,14 +2,15 @@ import DeliveryProblem from '../models/DeliveryProblem';
 import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Provider from '../models/Provider';
-import Mail from '../../lib/Mail';
 
 import CancellationMail from '../jobs/CancellationMail';
 import Queue from '../../lib/Queue';
 
 class ProblemController {
   async index(req, res) {
-    const problems = await DeliveryProblem.findAll({
+    const { page } = req.query;
+
+    const problems = await DeliveryProblem.findAndCountAll({
       include: {
         model: Delivery,
         as: 'delivery',
@@ -19,6 +20,7 @@ class ProblemController {
           'recipient_id',
           'provider_id',
           'start_date',
+          'canceled_at',
         ],
         include: {
           model: Recipient,
@@ -35,9 +37,12 @@ class ProblemController {
           ],
         },
       },
+      order: [['id', 'DESC']],
+      limit: 10,
+      offset: page >= 1 ? (page - 1) * 10 : 0,
     });
 
-    return res.json(problems);
+    return res.json(problems.rows);
   }
 
   async show(req, res) {
@@ -117,13 +122,15 @@ class ProblemController {
       return res.status(400).json({ error: 'Invalid problem id!' });
     }
 
-    const { name, email } = problem.delivery.provider;
+    if (problem.delivery.provider) {
+      const { name, email } = problem.delivery.provider;
 
-    await Queue.add(CancellationMail.key, {
-      name,
-      email,
-      problem,
-    });
+      await Queue.add(CancellationMail.key, {
+        name,
+        email,
+        problem,
+      });
+    }
 
     const { delivery_id } = problem;
 

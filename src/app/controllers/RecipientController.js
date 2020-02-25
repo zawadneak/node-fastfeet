@@ -13,9 +13,7 @@ class RecipientController {
       complement: Yup.string(),
       state: Yup.string().required(),
       city: Yup.string().required(),
-      postalCode: Yup.number()
-        .positive()
-        .required(),
+      postalCode: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -61,7 +59,7 @@ class RecipientController {
       complement: Yup.string(),
       state: Yup.string(),
       city: Yup.string(),
-      postalCode: Yup.number().positive(),
+      postalCode: Yup.string(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -109,6 +107,7 @@ class RecipientController {
           [Op.like]: `${q || ''}%`,
         },
       },
+      order: [['id', 'DESC']],
       limit: 10,
       offset: page >= 1 ? (page - 1) * 10 : 0,
     });

@@ -106,6 +106,11 @@ class DeliveryController {
       order: [['id', 'DESC']],
       include: [
         {
+          model: File,
+          as: 'signature',
+          attributes: ['id', 'path', 'url'],
+        },
+        {
           model: Recipient,
           as: 'destination',
           attributes: [
