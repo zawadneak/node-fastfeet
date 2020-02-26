@@ -100,7 +100,7 @@ class RecipientController {
   }
 
   async index(req, res) {
-    const { q, page } = req.query;
+    const { q, page, limit } = req.query;
     const recipients = await Recipient.findAndCountAll({
       where: {
         name: {
@@ -108,7 +108,7 @@ class RecipientController {
         },
       },
       order: [['id', 'DESC']],
-      limit: 10,
+      limit: limit || 10,
       offset: page >= 1 ? (page - 1) * 10 : 0,
     });
 
