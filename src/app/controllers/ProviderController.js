@@ -66,7 +66,7 @@ class ProviderController {
   }
 
   async index(req, res) {
-    const { q, page } = req.query;
+    const { q, page, limit } = req.query;
     const providers = await Provider.findAndCountAll({
       where: {
         name: {
@@ -82,7 +82,7 @@ class ProviderController {
         },
       ],
       order: [['id', 'DESC']],
-      limit: 10,
+      limit: limit || 10,
       offset: page >= 1 ? (page - 1) * 10 : 0,
     });
 
