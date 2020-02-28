@@ -102,6 +102,27 @@ class ProviderController {
 
     return res.send();
   }
+
+  async show(req, res) {
+    const { id } = req.params;
+
+    const findProvider = await Provider.findByPk(id, {
+      attributes: ['id', 'name', 'email'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['path', 'url'],
+        },
+      ],
+    });
+
+    if (!findProvider) {
+      return res.status(400).json({ error: 'Invalid ID!' });
+    }
+
+    return res.json(findProvider);
+  }
 }
 
 export default new ProviderController();

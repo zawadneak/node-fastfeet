@@ -23,6 +23,8 @@ routes.get('/provider/:provider_id/delivered', DeliveredController.index);
 
 routes.get('/provider/:provider_id/deliveries', DeliveryController.show);
 
+routes.get('/provider/:id', ProviderController.show);
+
 routes.put(
   '/provider/:provider_id/deliveries/:delivery_id',
   DeliveryController.update
