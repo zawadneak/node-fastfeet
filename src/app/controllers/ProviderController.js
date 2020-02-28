@@ -106,6 +106,10 @@ class ProviderController {
   async show(req, res) {
     const { id } = req.params;
 
+    if (id === 'null') {
+      return res.status(400).json({ error: 'Null ID!' });
+    }
+
     const findProvider = await Provider.findByPk(id, {
       attributes: ['id', 'name', 'email'],
       include: [
