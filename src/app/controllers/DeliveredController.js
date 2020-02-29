@@ -14,7 +14,7 @@ class DeliveredController {
           [Op.between]: [new Date(0), new Date()],
         },
       },
-      attributes: ['id', 'product', 'start_date', 'end_date'],
+      attributes: ['id', 'product', 'start_date', 'end_date', 'created_at'],
       order: [['end_date', 'desc']],
       include: [
         {

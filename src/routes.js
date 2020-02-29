@@ -37,6 +37,8 @@ routes.put(
 
 routes.post('/delivery/:delivery_id/problems', ProblemController.store);
 
+routes.get('/delivery/:delivery_id/problems', ProblemController.show);
+
 routes.use(tokenAuth);
 
 routes.post('/recipient', RecipientController.store);
@@ -64,8 +66,6 @@ routes.delete('/delivery/:id', DeliveryController.delete);
 routes.get('/delivery/problems', ProblemController.index);
 
 routes.put('/delivery/:delivery_id', DeliveryEditController.update);
-
-routes.get('/delivery/:delivery_id/problems', ProblemController.show);
 
 routes.delete('/problem/:problem_id/cancel-delivery', ProblemController.delete);
 
