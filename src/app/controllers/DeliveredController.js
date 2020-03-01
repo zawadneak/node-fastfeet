@@ -20,7 +20,16 @@ class DeliveredController {
         {
           model: Recipient,
           as: 'destination',
-          attributes: ['id', 'name', 'postal_code', 'city'], // Address not included for recipient safety issues!
+          attributes: [
+            'id',
+            'name',
+            'street',
+            'number',
+            'complement',
+            'state',
+            'city',
+            'postalCode',
+          ],
         },
       ],
     });

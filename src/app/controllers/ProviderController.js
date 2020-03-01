@@ -111,7 +111,7 @@ class ProviderController {
     }
 
     const findProvider = await Provider.findByPk(id, {
-      attributes: ['id', 'name', 'email'],
+      attributes: ['id', 'name', 'email', 'created_at'],
       include: [
         {
           model: File,
