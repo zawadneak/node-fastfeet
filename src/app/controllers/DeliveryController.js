@@ -68,6 +68,7 @@ class DeliveryController {
         end_date: null,
       },
       attributes: ['id', 'product', 'start_date', 'created_at'],
+      order: [['id', 'ASC']],
       include: [
         {
           model: Recipient,
@@ -80,6 +81,7 @@ class DeliveryController {
             'complement',
             'state',
             'city',
+            'postalCode',
           ],
         },
       ],

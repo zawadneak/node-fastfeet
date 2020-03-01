@@ -62,20 +62,6 @@ class ProblemController {
           'provider_id',
           'start_date',
         ],
-        include: {
-          model: Recipient,
-          as: 'destination',
-          attributes: [
-            'id',
-            'name',
-            'street',
-            'number',
-            'complement',
-            'state',
-            'city',
-            'postalCode',
-          ],
-        },
       },
     });
     return res.json(problems);
