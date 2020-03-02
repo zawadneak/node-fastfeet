@@ -24,8 +24,7 @@
 :rocket: The Challenge
 ------------------
 This challenge was proposed at a [**Rocketseat**](https://rocketseat.com.br/) GoSack bootcamp! The main objective is creating a 
-backend application for a imaginary delivery company. Along with this server, the web front-end and the mobile application will 
-also be developed!
+backend application for a imaginary delivery company. Along with this server, the web front-end and project can be seen [here](https://github.com/lucascassilha/react-fastfeet) and the mobile application [here](https://github.com/lucascassilha/react-native-fastfeet)
 
 The challenge GitHub page can be seen [here](https://github.com/Rocketseat/bootcamp-gostack-desafio-02/blob/master/README.md#--) *(part 1)* and [here](https://github.com/Rocketseat/bootcamp-gostack-desafio-03/blob/master/README.md#desafio-03-continuando-aplica%C3%A7%C3%A3o) *(part 2)*
 (Brazilian Portuguese)
